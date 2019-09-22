@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+  - node
+
+jobs:
+  include:
+
+    - stage: lint
+      script: npm run lint
+
+    - stage: test
+      script: npm run test
+
+    - stage: coverage
+      if: branch = master
+      script: npm run coverage
+
+    - stage: build
+      script: npm run build
+
+    - stage: npm release
+      deploy:
+        skip_cleanup: true
+        provider: npm
+        email: $NPM_USER
+        api_key: $NPM_TOKEN
+          on:
+            repo: t1m0thy-michael/event
+            branch: master
+                
+notifications:
+  email: false
