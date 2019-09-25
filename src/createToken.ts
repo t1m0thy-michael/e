@@ -1,7 +1,7 @@
 import { Token } from './types'
 
 export interface IcreateToken {
-	(topic: string, id: string: fn: Function): Token
+	(topic: string, id: string, fn: Function): Token
 }
 
 export const createToken: IcreateToken = (topic, id, fn) => 

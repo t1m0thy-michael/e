@@ -1,22 +1,30 @@
-import { EventInterfacePrototype, EventInterface, Token } from './types'
+import { EventInterfacePrototype, EventInterface } from './types'
 
-import { decycle } from 'tim_util'
+import { sub } from './sub'
+import { pub } from './pub'
+import { remove } from './remove'
+import { stdEvt } from './stdEvt'
 
-import sub from './sub'
-
-const Event: EventInterfacePrototype = {
-
-	// methods
-	pub: null,
-	sub: sub,
-	remove: null,
-	create: null,
-
-	// language features
-	toString: () => '[object EventBus]',
-	toJson: function (this: EventInterface) { return decycle(this.topics) }
+export interface Create {
+	(): EventInterface
 }
 
-const create = (): EventInterface => Object.create(Event, {
+export const create: Create = (): EventInterface => Object.create(Event, {
 	topics: { value: [], writable: false }
 })
+
+const Event: EventInterfacePrototype = {
+	pub: pub,
+	sub: sub,
+	remove: remove,
+	toString: () => '[object Eventbus]',
+}
+
+const gbl = (<any>globalThis) || (<any>window) || (<any>self) || (<any>global) // node and browser compatible
+if (!gbl.__event) {
+	gbl.__event = create()
+	stdEvt(gbl.__event)
+}
+
+export const event = gbl.__event
+export default gbl.__event

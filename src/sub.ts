@@ -1,13 +1,23 @@
-import { EventInterface, Subscription, Token } from './types'
-
+import { EventInterface, Sub, Token } from './types'
+import { makeSureItsAnArray, makeID, isFunction, isString } from '@t1m0thy_michael/u'
 import { createToken } from './createToken'
 
-import { makeSureItsAnArray, makeID, isFunction } from 'tim_util'
+const SUBSCRIPTION_ID_LENGTH = 10
 
-export interface Sub {
-	(s: Subscription): Token[]
-}
-
+/**
+ * Subscribe to an event.
+ *
+ * ```js
+ * const myToken = e.sub({
+ * 	topic: 'my/event', // topic to subscribe to
+ * 	fn: (data, ctx, topic) => do stuff, // function to call on event
+ * 	distinct: true, // only call fn if data has changed since last call
+ * 	once: false, // unsubscribe after first call
+ * 	description: 'An example event subscription' // info only, useful for debugging
+ * })
+ *```
+ *
+ */
 export const sub: Sub = function (
 	this: EventInterface,
 	{
@@ -19,14 +29,10 @@ export const sub: Sub = function (
 		description = undefined
 	}
 ){
-
-	// must have a topic<string> and fn<function> in obj
-	if (!topic || !fn || !isFunction(fn)) throw 'Invalid Event Subscription'
-
-	const newID: string = makeID(10)
-
+	const newID: string = makeID(SUBSCRIPTION_ID_LENGTH)
 	const tokens: Token[] = []
 
+	// can subscribe to more than one event at a time
 	const topics = makeSureItsAnArray(topic)
 	
 	for (let i = 0; i < topics.length; i++){
@@ -38,22 +44,24 @@ export const sub: Sub = function (
 		// check function is not already subscribed to event
 		for (let prop in this.topics[topic]) {
 			if (this.topics[topic][prop].fn === fn) {
-				return createToken(topic, prop, fn)
+				return [createToken(topic, prop, fn)]
 			}
 		}
 
+		// add to topics object
 		this.topics[topic][newID] = {
 			fn: fn,
-			distinct: distinct || false,
-			once: once || false,
+			distinct: distinct,
+			once: once,
 			previousData: undefined,
-			minInterval: (minInterval || 0) * 1000 || 0,
+			minInterval: (minInterval) * 1000,
 			lastPublished: 0,
 			description: description,
 		}
 
+		// return array of tokens
 		tokens.push(createToken(topic, newID, fn))
-	})
 
+	}
 	return tokens
 }

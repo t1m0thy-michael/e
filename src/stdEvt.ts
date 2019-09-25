@@ -1,6 +1,6 @@
-import { EventInterface } from '../types'
+import { EventInterface } from './types'
 // event should handle all browser/window events
-export default (evt: EventInterface) => {
+export const stdEvt = (evt: EventInterface) => {
 
 	if (typeof window != 'undefined') {
 		// const onAnyEvent = (e) => {

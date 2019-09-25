@@ -25,7 +25,7 @@ jobs:
         email: $NPM_USER
         api_key: $NPM_TOKEN
           on:
-            repo: t1m0thy-michael/event
+            repo: t1m0thy-michael/e
             branch: master
                 
 notifications:

@@ -7,13 +7,8 @@ export interface Token {
 
 export interface Publish {
 	topic: string,
-	data: any,
+	data?: any,
 	ctx?: any,
-	// skipSchemaValidation?: boolean,
-}
-
-export interface Pub {
-	(obj: Publish): Promise<any[] | undefined>
 }
 
 export interface SubscriptionBase {
@@ -38,8 +33,13 @@ export interface Sub {
 	(s: Subscription): Token[]
 }
 
+export interface Pub {
+	(obj: Publish): Promise<(any|undefined)[]>
+}
+
+
 export interface Remove {
-	(t: Token): void
+	(t: Token | Token[]): true
 }
 
 export interface Create {
@@ -50,9 +50,7 @@ export interface EventInterfacePrototype {
 	pub: Pub,
 	remove: Remove,
 	sub: Sub,
-	create: Create,
 	toString: () => string,
-	toJson: () => object,
 }
 
 export interface EventInterface extends EventInterfacePrototype {

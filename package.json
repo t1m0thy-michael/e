@@ -1,5 +1,5 @@
 {
-  "name": "tim_event",
+  "name": "@t1m0thy_michael/e",
   "version": "0.1.0",
   "description": "e: [event] Pub/Sub Event Bus",
   "main": "index.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/t1m0thy-michael/event.git"
+    "url": "git://github.com/t1m0thy-michael/e.git"
   },
   "author": "Timothy Michael",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/t1m0thy-michael/event/issues"
+    "url": "https://github.com/t1m0thy-michael/e/issues"
   },
-  "homepage": "https://github.com/t1m0thy-michael/event#readme",
+  "homepage": "https://github.com/t1m0thy-michael/e#readme",
   "devDependencies": {
     "@types/chai": "^4.2.2",
     "@types/mocha": "^5.2.7",
@@ -45,6 +45,6 @@
     "webpack-cli": "^3.3.8"
   },
   "dependencies": {
-    "tim_util": "^1.2.3"
+    "@t1m0thy_michael/u": "0.0.2"
   }
 }
