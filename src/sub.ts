@@ -1,5 +1,5 @@
 import { EventInterface, Sub, Token } from './types'
-import { makeSureItsAnArray, makeID, isFunction, isString } from '@t1m0thy_michael/u'
+import { makeSureItsAnArray, makeID } from '@t1m0thy_michael/u'
 import { createToken } from './createToken'
 
 const SUBSCRIPTION_ID_LENGTH = 10

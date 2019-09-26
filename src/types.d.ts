@@ -29,6 +29,10 @@ export interface InternalSubscription extends SubscriptionBase {
 	previousData: any,
 }
 
+export interface CreateToken {
+	(topic: string, id: string, fn: Function): Token
+}
+
 export interface Sub {
 	(s: Subscription): Token[]
 }

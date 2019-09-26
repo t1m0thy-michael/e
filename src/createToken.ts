@@ -1,10 +1,6 @@
-import { Token } from './types'
+import { CreateToken } from './types.d'
 
-export interface IcreateToken {
-	(topic: string, id: string, fn: Function): Token
-}
-
-export const createToken: IcreateToken = (topic, id, fn) => 
+export const createToken: CreateToken = (topic, id, fn) => 
 	Object.create({}, {
 		t: { value: topic, writable: false },
 		i: { value: id, writable: false },
