@@ -6,6 +6,6 @@
 .travis.yml
 coverage
 src
-tests
+src/*.test.*
 tsconfig.json
 webpack.config.js

@@ -9,7 +9,7 @@ export interface Create {
 	(): EventInterface
 }
 
-export const create: Create = (): EventInterface => Object.create(Event, {
+export const create: Create = () => Object.create(Event, {
 	topics: { value: [], writable: false }
 })
 
