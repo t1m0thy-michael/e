@@ -21,9 +21,11 @@ export interface SubscriptionBase {
 
 export interface Subscription extends SubscriptionBase {
 	topic: string,
+	uid?: string,
 }
 
 export interface InternalSubscription extends SubscriptionBase {
+	uid: string,
 	lastPublished: number,
 	minInterval: number,
 	previousData: any,

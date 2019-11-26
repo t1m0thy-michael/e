@@ -23,13 +23,14 @@ export const sub: Sub = function (
 	{
 		topic,
 		fn,
+		uid,
 		distinct = false,
 		once = false,
 		minInterval = 0,
 		description = undefined
 	}
 ){
-	const newID: string = makeID(SUBSCRIPTION_ID_LENGTH)
+	const newID: string = uid || makeID(SUBSCRIPTION_ID_LENGTH)
 	const tokens: Token[] = []
 
 	// can subscribe to more than one event at a time
@@ -51,6 +52,7 @@ export const sub: Sub = function (
 		// add to topics object
 		this.topics[topic][newID] = {
 			fn: fn,
+			uid: newID,
 			distinct: distinct,
 			once: once,
 			previousData: undefined,
