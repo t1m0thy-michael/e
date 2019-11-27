@@ -1,6 +1,6 @@
 {
   "name": "@t1m0thy_michael/e",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "e: [event] Pub/Sub Event Bus",
   "main": "index.js",
   "types": "types/index.d.ts",
