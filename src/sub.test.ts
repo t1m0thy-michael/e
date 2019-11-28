@@ -46,6 +46,36 @@ describe('event.sub()', function () {
 		assert.lengthOf(Object.keys(event.topics), 2, 'Second topic added')
 	})
 
+	it('UID overwrites previous subscription', function () {
+		const event = create()
+
+		assert.lengthOf(event.topics, 0, 'Topics starts empty')
+		assert.lengthOf(Object.keys(event.topics), 0, 'Topics starts empty')
+
+		const fn1 = () => true
+		const subscription1 = {
+			fn: fn1,
+			uid: 'test',
+			topic: 'myTopic',
+		}
+		event.sub(subscription1)
+
+		assert.lengthOf(Object.keys(event.topics), 1, 'One subscription exists')
+		assert.isDefined(event.topics['mytopic']['test'], 'First subscription added')
+		assert.strictEqual(event.topics['mytopic']['test'].fn, fn1)
+
+		const fn2 = () => true
+		const subscription2 = {
+			fn: fn2,
+			uid: 'test',
+			topic: 'myTopic',
+		}
+		event.sub(subscription2)
+
+		assert.lengthOf(Object.keys(event.topics), 1, 'Still only one subscription exists')
+		assert.strictEqual(event.topics['mytopic']['test'].fn, fn2, 'Second subscriptions function overwrites first' )
+	})
+
 	it('Adds new subscription to event.topics.mytopic', function () {
 		const event = create()
 

@@ -45,7 +45,7 @@ export const pub: Pub = async function (
 		if (subscriber.once) this.remove({ t: topic, i: key })
 	}
 
-	return returnArray
+	return Promise.all(returnArray)
 }
 
 export default pub
