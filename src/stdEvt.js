@@ -1,6 +1,5 @@
-import { EventInterface } from './types'
 // event should handle all browser/window events
-export const stdEvt = (evt: EventInterface) => {
+export const stdEvt = function (evt) {
 
 	if (typeof window != 'undefined') {
 		// const onAnyEvent = (e) => {
@@ -17,9 +16,9 @@ export const stdEvt = (evt: EventInterface) => {
 		// }
 
 		// MouseEvent
-		window.addEventListener('click', (e) => evt.pub({ topic: 'click', data: { x: e.x, y: e.y, e: e } }))
+		window.addEventListener('click', (e) => evt.pub({ topic: 'e/click', data: { x: e.x, y: e.y, e: e } }))
 		// window.addEventListener('click', onAnyEvent)
-		window.addEventListener('dblclick', (e) => evt.pub({ topic: 'dblclick', data: { x: e.x, y: e.y, e: e } }))
+		window.addEventListener('dblclick', (e) => evt.pub({ topic: 'e/dblclick', data: { x: e.x, y: e.y, e: e } }))
 
 		// let msedwn = false
 		// window.addEventListener('mousedown', (e) => {)
@@ -36,7 +35,7 @@ export const stdEvt = (evt: EventInterface) => {
 		// }
 		// // window.addEventListener('mouseenter', (e) => onAnyEvent(e))
 		// // window.addEventListener('mouseleave', (e) => onAnyEvent(e))
-		window.addEventListener('mousemove', (e) => evt.pub({ topic: 'mousemove', data: { x: e.x, y: e.y, e: e } }))
+		window.addEventListener('mousemove', (e) => evt.pub({ topic: 'e/mousemove', data: { x: e.x, y: e.y, e: e } }))
 		// window.addEventListener('mouseout', (e) => onAnyEvent(e))
 		// window.addEventListener('mouseover', (e) => onAnyEvent(e))
 		// window.addEventListener('mousewheel', (e) => onAnyEvent(e))
@@ -48,7 +47,7 @@ export const stdEvt = (evt: EventInterface) => {
 		// window.addEventListener('pointerlockerror', (e) => onAnyEvent(e))
 
 		// // KeyboardEvent
-		window.addEventListener('keydown', (e) => evt.pub({ topic: 'keydown', data: { key: e.key, code: e.keyCode, e: e } }))
+		window.addEventListener('keydown', (e) => evt.pub({ topic: 'e/keydown', data: { key: e.key, code: e.keyCode, e: e } }))
 		// window.addEventListener('keypress', (e) => evt.pub('keypress', { key: e.key, e }))
 		// window.addEventListener('keyup', (e) => evt.pub('keyup', { key: e.key, e }))
 
@@ -69,7 +68,7 @@ export const stdEvt = (evt: EventInterface) => {
 		// window.addEventListener('unload', (e) => onAnyEvent(e))
 
 		// // UI
-		window.addEventListener('resize', (e) => evt.pub({ topic: 'resize', data: { width: window.innerWidth, height: window.innerHeight, e } }))
+		window.addEventListener('resize', (e) => evt.pub({ topic: 'e/resize', data: { width: window.innerWidth, height: window.innerHeight, e } }))
 		// window.addEventListener('scroll', (e) => onAnyEvent(e))
 
 		// FocusEvent

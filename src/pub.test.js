@@ -14,7 +14,7 @@ describe('event.pub()', function () {
 		let topic = null
 
 		const subscription = {
-			fn: (arg1: any, arg2: any, arg3: any) => {
+			fn: (arg1, arg2, arg3) => {
 				calls++
 				data = arg1
 				ctx = arg2
@@ -95,7 +95,7 @@ describe('event.pub()', function () {
 
 		event.sub({
 			topic: 'myTopic',
-			fn: (val: number) => total += val,
+			fn: (val) => total += val,
 			distinct: true,
 		})
 
@@ -115,7 +115,7 @@ describe('event.pub()', function () {
 
 		event.sub({
 			topic: 'myTopic',
-			fn: (val: number) => total += val,
+			fn: (val) => total += val,
 			minInterval: 1,
 		})
 
@@ -140,7 +140,7 @@ describe('event.pub()', function () {
 
 		event.sub({
 			topic: 'myTopic',
-			fn: (val: number) => total += val,
+			fn: (val) => total += val,
 			once: true,
 		})
 

@@ -1,29 +1,23 @@
-import { EventInterfacePrototype, EventInterface } from './types'
-
 import { sub } from './sub'
 import { pub } from './pub'
 import { remove } from './remove'
 import { stdEvt } from './stdEvt'
 
-export interface Create {
-	(): EventInterface
-}
-
-export const create: Create = (): EventInterface => Object.create(Event, {
+export const create = () => Object.create(Event, {
 	topics: { value: [], writable: false }
 })
 
-const Event: EventInterfacePrototype = {
+const Event = {
 	pub: pub,
 	sub: sub,
 	remove: remove,
+	stdEvt: stdEvt,
 	toString: () => '[object Eventbus]',
 }
 
-const gbl = (<any>globalThis) || (<any>window) || (<any>self) || (<any>global) // node and browser compatible
+const gbl = (globalThis) || (window) || (self) || (global) // node and browser compatible
 if (!gbl.__event) {
 	gbl.__event = create()
-	stdEvt(gbl.__event)
 }
 
 export const event = gbl.__event

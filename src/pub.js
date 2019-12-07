@@ -1,5 +1,3 @@
-import { Pub, EventInterface } from './types'
-
 /**
  * Publish an event.
  *
@@ -12,17 +10,15 @@ import { Pub, EventInterface } from './types'
  *```
  * 
  */
-export const pub: Pub = async function (
-	this: EventInterface,
-	{
-		topic,
-		data,
-		ctx,
-	}) {
+export const pub = async function ({
+	topic,
+	data,
+	ctx,
+}) {
 
 	topic = topic.toLowerCase()
 
-	const returnArray: any[] = []
+	const returnArray = []
 	
 	// only publish if subs exist
 	if (!this.topics[topic]) return returnArray

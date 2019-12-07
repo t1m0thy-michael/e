@@ -7,5 +7,4 @@
 coverage
 src
 tests
-tsconfig.json
 webpack.config.js

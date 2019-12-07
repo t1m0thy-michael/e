@@ -1,4 +1,3 @@
-import { EventInterface, Sub, Token } from './types'
 import { makeSureItsAnArray, makeID } from '@t1m0thy_michael/u'
 import { createToken } from './createToken'
 
@@ -18,20 +17,17 @@ const SUBSCRIPTION_ID_LENGTH = 10
  *```
  *
  */
-export const sub: Sub = function (
-	this: EventInterface,
-	{
-		topic,
-		fn,
-		uid,
-		distinct = false,
-		once = false,
-		minInterval = 0,
-		description = undefined
-	}
-){
-	const newID: string = uid || makeID(SUBSCRIPTION_ID_LENGTH)
-	const tokens: Token[] = []
+export const sub = function ({
+	topic,
+	fn,
+	uid,
+	distinct = false,
+	once = false,
+	minInterval = 0,
+	description = undefined
+}){
+	const newID = uid || makeID(SUBSCRIPTION_ID_LENGTH)
+	const tokens = []
 
 	// can subscribe to more than one event at a time
 	const topics = makeSureItsAnArray(topic)

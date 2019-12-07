@@ -1,4 +1,3 @@
-import { EventInterface, Remove } from './types'
 import { makeSureItsAnArray, sizeOf } from '@t1m0thy_michael/u'
 
 /**
@@ -11,7 +10,7 @@ import { makeSureItsAnArray, sizeOf } from '@t1m0thy_michael/u'
  * ```
  * 
  */
-export const remove: Remove = function (this: EventInterface, token) {
+export const remove = function (token) {
 	const tokens = makeSureItsAnArray(token)
 	for (let token of tokens) {
 		if (this.topics[token.t] && this.topics[token.t][token.i]) delete this.topics[token.t][token.i]
