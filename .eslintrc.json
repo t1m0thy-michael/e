@@ -3,7 +3,6 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint"],
     "env": {
         "es6": true,
         "node": true,

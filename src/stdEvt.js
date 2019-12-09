@@ -2,84 +2,52 @@
 export const stdEvt = function (evt) {
 
 	if (typeof window != 'undefined') {
-		// const onAnyEvent = (e) => {
-		// 	if (e.target.id)
-		// 		pub(`${e.type}/#${e.target.id}`, e, e.target)
-
-		// 	if (e.target.classList && e.target.classList.length > 0)
-		// 		e.target.classList.forEach((val) => evt.pub(`${e.type}/.${val}`, e, e.target))
-
-		// 	if (e.target.nodeName)
-		// 		pub(`${e.type}/${e.target.nodeName.toLowerCase()}`, e, e.target)
-
-		// 	pub(`${e.type}`, e, e.target)
-		// }
+		const onAnyEvent = (e) => {
+			evt.pub({
+				topic: `e/global/${e.type}`,
+				data: e,
+			})
+		}
 
 		// MouseEvent
-		window.addEventListener('click', (e) => evt.pub({ topic: 'e/click', data: { x: e.x, y: e.y, e: e } }))
-		// window.addEventListener('click', onAnyEvent)
-		window.addEventListener('dblclick', (e) => evt.pub({ topic: 'e/dblclick', data: { x: e.x, y: e.y, e: e } }))
+		window.addEventListener('click', onAnyEvent)
+		window.addEventListener('dblclick', onAnyEvent)
+		window.addEventListener('mousedown', onAnyEvent)
+		window.addEventListener('mouseup', onAnyEvent)
 
-		// let msedwn = false
-		// window.addEventListener('mousedown', (e) => {)
-		// 	if (!msedwn) msedwn = true
-		// 	const timer = setInterval(() => {
-		// 		if (!msedwn) clearInterval(timer)
-		// 		pub({ topic: 'mousedown', data: { x: e.x, y: e.y, e: e } })
-		// 	}, 100)
-
-		// }
-		// window.addEventListener('mouseup', (e) => {)
-		// 	msedwn = false
-		// 	pub({ topic: 'mousedown', data: { x: e.x, y: e.y, e: e } })
-		// }
-		// // window.addEventListener('mouseenter', (e) => onAnyEvent(e))
-		// // window.addEventListener('mouseleave', (e) => onAnyEvent(e))
-		window.addEventListener('mousemove', (e) => evt.pub({ topic: 'e/mousemove', data: { x: e.x, y: e.y, e: e } }))
-		// window.addEventListener('mouseout', (e) => onAnyEvent(e))
-		// window.addEventListener('mouseover', (e) => onAnyEvent(e))
-		// window.addEventListener('mousewheel', (e) => onAnyEvent(e))
-		// window.addEventListener('auxclick', (e) => onAnyEvent(e))
-		// window.addEventListener('contextmenu', (e) => onAnyEvent(e))
-		// window.addEventListener('wheel', (e) => onAnyEvent(e))
-		// window.addEventListener('select', (e) => onAnyEvent(e))
-		// window.addEventListener('pointerlockchange', (e) => onAnyEvent(e))
-		// window.addEventListener('pointerlockerror', (e) => onAnyEvent(e))
+		window.addEventListener('mousemove', onAnyEvent)
+		window.addEventListener('mousewheel', onAnyEvent)
+		window.addEventListener('auxclick', onAnyEvent)
+		window.addEventListener('contextmenu', onAnyEvent)
+		window.addEventListener('wheel', onAnyEvent)
+		window.addEventListener('select', onAnyEvent)
 
 		// // KeyboardEvent
-		window.addEventListener('keydown', (e) => evt.pub({ topic: 'e/keydown', data: { key: e.key, code: e.keyCode, e: e } }))
-		// window.addEventListener('keypress', (e) => evt.pub('keypress', { key: e.key, e }))
-		// window.addEventListener('keyup', (e) => evt.pub('keyup', { key: e.key, e }))
+		window.addEventListener('keydown', onAnyEvent)
+		window.addEventListener('keypress', onAnyEvent)
+		window.addEventListener('keyup', onAnyEvent)
 
 		// // Network
-		// window.addEventListener('online', (e) => onAnyEvent(e))
-		// window.addEventListener('offline', (e) => onAnyEvent(e))
-
-		// // Form
-		// window.addEventListener('reset', (e) => onAnyEvent(e))
-		// window.addEventListener('submit', (e) => onAnyEvent(e))
+		window.addEventListener('online', onAnyEvent)
+		window.addEventListener('offline', onAnyEvent)
 
 		// // Print 
-		// window.addEventListener('beforeprint', (e) => onAnyEvent(e))
-		// window.addEventListener('afterprint', (e) => onAnyEvent(e))
-
-		// Resource
-		// window.addEventListener('beforeunload', (e) => onAnyEvent(e))
-		// window.addEventListener('unload', (e) => onAnyEvent(e))
+		window.addEventListener('beforeprint', onAnyEvent)
+		window.addEventListener('afterprint', onAnyEvent)
 
 		// // UI
-		window.addEventListener('resize', (e) => evt.pub({ topic: 'e/resize', data: { width: window.innerWidth, height: window.innerHeight, e } }))
-		// window.addEventListener('scroll', (e) => onAnyEvent(e))
+		window.addEventListener('resize', onAnyEvent)
+		window.addEventListener('scroll', onAnyEvent)
 
 		// FocusEvent
 		//have to do focus events this way, they don't bubble
-		// document.addEventListener('DOMContentLoaded', () => {
-		// 	window.addEventListener('focusin', onAnyEvent, false);
-		// 	window.addEventListener('focusout', onAnyEvent, false);
-		// });
+		document.addEventListener('DOMContentLoaded', () => {
+			window.addEventListener('focusin', onAnyEvent, false)
+			window.addEventListener('focusout', onAnyEvent, false)
+		})
 
-		// // focus events for the window/iframe etc
-		// window.addEventListener('focus', (e) => onAnyEvent(e);)
-		// window.addEventListener('blur', (e) => onAnyEvent(e);		)
+		// focus events for the window/iframe etc
+		window.addEventListener('focus',  onAnyEvent)
+		window.addEventListener('blur', onAnyEvent)
 	}
 }

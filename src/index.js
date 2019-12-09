@@ -11,14 +11,16 @@ const Event = {
 	pub: pub,
 	sub: sub,
 	remove: remove,
-	stdEvt: stdEvt,
 	toString: () => '[object Eventbus]',
 }
 
-const gbl = (globalThis) || (window) || (self) || (global) // node and browser compatible
-if (!gbl.__event) {
-	gbl.__event = create()
-}
+export const event = (() => {
+	const gbl = globalThis || window || self || global
+	if (!gbl.e) {
+		gbl.e = create()
+		stdEvt(gbl.e)
+	}
+	return gbl.e
+})()
 
-export const event = gbl.__event
-export default gbl.__event
+export default event
