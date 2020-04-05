@@ -15,7 +15,7 @@ export const create = () => Object.create(Event, {
 })
 
 export const event = (() => {
-	const gbl = globalThis || window || self || global
+	const gbl = window || self || global
 	if (!gbl.e) {
 		gbl.e = create()
 	}
